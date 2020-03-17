@@ -36,6 +36,7 @@ class StoryCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
+            //TODO: Judgment by isCheked of property of Model Story
             if self.isSelected {
                 profileImageView.refreshBorder(enabled: !self.isSelected, animated: true)
             }
@@ -44,8 +45,6 @@ class StoryCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        clipsToBounds = true
         
         setupViews()
     }
@@ -63,9 +62,9 @@ class StoryCell: UICollectionViewCell {
         textLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 4, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        profileImageView.imageView.image = nil
+        profileImageView.refreshBorder()
     }
 }

@@ -47,8 +47,6 @@ class AddStoryCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        clipsToBounds = true
-        
         setupViews()
         setupLayers()
     }
@@ -74,9 +72,9 @@ class AddStoryCell: UICollectionViewCell {
         addImageView.layer.cornerRadius = 20 / 2
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        profileImageView.image = nil
+    // MARK: - UITraitCollection
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        addImageView.layer.borderColor = ColorScheme.surfaceColor.cgColor
     }
 }

@@ -70,7 +70,7 @@ class PostCell: UICollectionViewCell {
     fileprivate let tagsLabel: UILabel = {
         let label = UILabel()
         label.text = "#holiday, #thailand"
-        label.textColor = .tag
+        label.textColor = .instagramBlue2
         label.font = TypographyScheme.body2
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -173,6 +173,7 @@ class PostCell: UICollectionViewCell {
         layer.cornerRadius = 8
         layer.applyShadow(color: .shadow, x: 0, y: 2, blur: 2, spread: 0)
         profileImageView.layer.cornerRadius = 40 / 2
+        photoImageView.layer.cornerRadius = 4
     }
     
     fileprivate func refreshFavoriteButton() {

@@ -26,13 +26,13 @@ class ApplicationScheme: NSObject {
     
     public let colorScheme: ColorScheming = {
         let scheme = SemanticColorScheme()
-        scheme.primaryColor = .secondarySystemBackground//.systemBackground
+        scheme.primaryColor = .instagramPrimary
         scheme.onPrimaryColor = .label
         scheme.secondaryColor = .instagramBlue
         scheme.onSecondaryColor = .white
-        scheme.backgroundColor = .tertiarySystemBackground//.secondarySystemBackground
+        scheme.backgroundColor = .instagramBackground
         scheme.onBackgroundColor = .label
-        scheme.surfaceColor = .secondarySystemBackground//.systemBackground
+        scheme.surfaceColor = .instagramPrimary
         scheme.onSurfaceColor = .label
         return scheme
     }()

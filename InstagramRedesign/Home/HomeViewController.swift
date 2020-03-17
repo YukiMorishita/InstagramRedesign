@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = ColorScheme.backgroundColor
+        v.backgroundColor = ColorScheme.backgroundColor
         
         setupNavigationItems()
         setupCollectionView()
@@ -41,14 +41,6 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate func setupRemainingNavItem() {
-        navigationController?.navigationBar.barTintColor = ColorScheme.primaryColor
-        navigationController?.navigationBar.tintColor = ColorScheme.onPrimaryColor
-        navigationController?.navigationBar.isTranslucent = false
-        
-        // Remove separator
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
         
@@ -170,7 +162,7 @@ extension HomeViewController: UICollectionViewDelegate {
             print("add story cell")
         }
         
-        // Story cell
+        // Story cell　
         if collectionView.tag == 0 && indexPath.item != 0 {
             print("story cell")
         }
@@ -184,8 +176,9 @@ extension HomeViewController: PostCellDelegate {
     func didOptions(cell: PostCell) {
         let bottomSheetVC = BottomSheetViewController()
         bottomSheetVC.modalPresentationStyle = .overFullScreen
-        bottomSheetVC.modalTransitionStyle = .crossDissolve
-        present(bottomSheetVC, animated: true, completion: nil)
+        bottomSheetVC.dismissOnBackgroundTap = true
+        bottomSheetVC.dismissOnDraggingDownSheet = true
+        present(bottomSheetVC, animated: false, completion: nil)
     }
     
     func didComment(cell: PostCell) {

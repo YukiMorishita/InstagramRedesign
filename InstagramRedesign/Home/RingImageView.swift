@@ -40,11 +40,11 @@ class RingImageView: UIView {
     }
     
     public func refreshBorder(enabled: Bool = true, animated: Bool = false) {
-        if !animated {
-            layer.borderWidth = enabled ? 2.0 : 1.0
-            layer.borderColor = enabled ? UIColor.systemOrange.cgColor : UIColor.lightGray.cgColor
-        } else {
+        if animated {
             startBorderWidthAndBorderColorAnimation()
+        } else {
+            layer.borderWidth = enabled ? 2.0 : 1.0
+            layer.borderColor = enabled ? gradientColor().cgColor : UIColor.lightGray.cgColor
         }
     }
     
@@ -54,7 +54,7 @@ class RingImageView: UIView {
         borderWidthAnimation.toValue = 1.0
         
         let borderColorAnimation = CABasicAnimation(keyPath: "borderColor")
-        borderColorAnimation.fromValue = UIColor.systemOrange.cgColor
+        borderColorAnimation.fromValue = gradientColor().cgColor
         borderColorAnimation.toValue = UIColor.lightGray.cgColor
         
         let animationGroup = CAAnimationGroup()
@@ -64,5 +64,18 @@ class RingImageView: UIView {
         animationGroup.isRemovedOnCompletion = false
         
         layer.add(animationGroup, forKey: "")
+    }
+    
+    private func gradientColor() -> UIColor {
+        let startGradient: UIColor = .rgb(red: 194, green: 53, blue: 132)
+        let endGradient: UIColor = .rgb(red: 247, green: 119, blue: 55)
+        
+        let colors = [startGradient.cgColor, endGradient.cgColor]
+        let size = CGSize(width: frame.width, height: frame.height)
+        let startPoint = CGPoint(x: 1, y: 0)
+        let endPoint = CGPoint(x: 0, y: 1)
+        
+        let color = UIColor.gradientColor(colors: colors, size: size, startPoint: startPoint, endPoint: endPoint)
+        return color
     }
 }

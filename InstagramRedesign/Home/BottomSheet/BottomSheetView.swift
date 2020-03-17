@@ -11,6 +11,7 @@ import UIKit
 class BottomSheetView: UIView {
     
     public var collectionViewTopConstraint: NSLayoutConstraint!
+    public var collectionViewHeightConstraint: NSLayoutConstraint!
     
     let overlayView: UIView = {
         let view = UIView()
@@ -26,7 +27,6 @@ class BottomSheetView: UIView {
         cv.backgroundColor = ColorScheme.surfaceColor
         cv.isScrollEnabled = false
         cv.clipsToBounds = false
-        cv.layer.applyShadow(color: .shadow, x: 0, y: -8, blur: 10, spread: 1)
         return cv
     }()
     
@@ -42,13 +42,16 @@ class BottomSheetView: UIView {
         
         overlayView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
-        collectionView.anchor(top: bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        collectionView.anchor(top: nil, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
         collectionViewTopConstraint = collectionView.topAnchor.constraint(equalTo: bottomAnchor)
-    }
-    
-    public func startOverlayViewAlphaAnimation() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.overlayView.alpha = 1.0
-        }, completion: nil)
+        collectionViewTopConstraint.isActive = true
+        
+        collectionViewHeightConstraint = collectionView.heightAnchor.constraint(equalToConstant: 0)
+        collectionViewHeightConstraint.isActive = true
+        
+        collectionView.layer.cornerRadius = 10
+        collectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        collectionView.layer.applyShadow(color: .shadow, x: 0, y: -8, blur: 10, spread: 1)
     }
 }
